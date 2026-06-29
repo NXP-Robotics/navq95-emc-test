@@ -1,0 +1,12 @@
+[Unit]
+Description=CAN EMC test
+
+[Service]
+Type=simple
+ExecStart=/opt/navq95-emc/tests/can.sh
+ExecStop=ip link set can0 down
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

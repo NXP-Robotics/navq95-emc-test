@@ -1,0 +1,11 @@
+[Unit]
+Description=WIFI EMC test
+
+[Service]
+Type=simple
+ExecStart=/opt/navq95-emc/tests/wifi.sh
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
