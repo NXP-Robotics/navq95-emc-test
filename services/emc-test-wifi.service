@@ -1,5 +1,7 @@
 [Unit]
 Description=WIFI EMC test
+Before=emc-test-sdcard.service
+After=NetworkManager.service
 
 [Service]
 Type=simple

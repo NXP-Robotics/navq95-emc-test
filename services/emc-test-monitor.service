@@ -4,7 +4,7 @@ Description=EMC test monitor
 [Service]
 Type=simple
 ExecStart=/opt/navq95-emc/tests/monitor.sh
-ExecStop=/opt/navq95-emc/tests/monitor.sh off
+ExecStop=/usr/bin/kill -TERM $MAINPID ; /opt/navq95-emc/tests/monitor.sh off
 Restart=on-failure
 RestartSec=10
 

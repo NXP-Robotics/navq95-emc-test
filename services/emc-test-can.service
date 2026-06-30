@@ -1,5 +1,6 @@
 [Unit]
 Description=CAN EMC test
+Before=emc-test-sdcard.service
 
 [Service]
 Type=simple

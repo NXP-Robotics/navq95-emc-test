@@ -1,0 +1,12 @@
+[Unit]
+Description=USB2 EMC test
+
+[Service]
+Type=simple
+ExecStart=/opt/navq95-emc/tests/block_device.sh sdb1
+ExecStop=/usr/bin/kill -TERM $MAINPID ; sleep 10 ; umount /dev/sdb1
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

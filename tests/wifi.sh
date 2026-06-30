@@ -12,3 +12,4 @@ echo $IP_ADDR
 iw dev mlan0 set power_save off
 iperf -c 192.168.0.1 -u -b 500M -l 1470 -t 0 -P 4 -B $IP_ADDR
 
+exit 1

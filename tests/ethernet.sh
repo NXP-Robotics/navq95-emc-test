@@ -11,3 +11,4 @@ echo $IP_ADDR
 
 iperf -c 192.168.0.1 -u -b 500M -l 1470 -t 0 -P 4 -B $IP_ADDR
 
+exit 1

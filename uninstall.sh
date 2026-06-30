@@ -5,13 +5,4 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 SERVICES_DIR=$SCRIPT_DIR/services
 SERVICES=$(ls "$SERVICES_DIR")
 
-cp -r "$SCRIPT_DIR" /opt/navq95-emc
-
-systemctl stop $SERVICES || true
-
-cp $SERVICES_DIR/* /usr/lib/systemd/system
-
-systemctl enable $SERVICES
-systemctl start $SERVICES
-
-sync
+systemctl disable $SERVICES || true

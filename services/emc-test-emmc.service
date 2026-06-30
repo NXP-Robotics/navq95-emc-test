@@ -1,0 +1,12 @@
+[Unit]
+Description=eMMC EMC test
+
+[Service]
+Type=simple
+ExecStart=/opt/navq95-emc/tests/block_device.sh mmcblk0p1
+ExecStop=/usr/bin/kill -TERM $MAINPID ; sleep 10 ; umount /dev/mmcblk0p1
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
