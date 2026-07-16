@@ -32,12 +32,12 @@ External devices are required to execute the test software:
 
 ## Features
 
-# Test services
+### Test services
 
 A number of test services are available. All services are enabled and run simultaneously by default, but can be individually turned on or off as desired.
 For a complete overview of the available services, see the services directory.
 
-# Monitor
+### Monitor
 
 The test services are monitored for being active and the result is notified by the RGB LED on the NavQ95.
 
@@ -46,6 +46,22 @@ RGB LED status:
  - <span style="color:red">RED</span>: Some tests are not active
  - <span style="color:green">GREEN</span>: All tests are active
  - Any other color or LED off means the monitor is not active
+
+### Additional device utilizations
+
+Beside running the test services, several optional actions can be performed to further increase device utilization. These don't require test services to be started to enable them.
+
+ - Apply SJA1110 loopback
+
+   This method increases utilization of the SJA1110 network switch by connecting a loopback cable, causing transmitted traffic to be fed back into the switch. Broadcast messages are particularly impactful, as they can continuously circulate through the network and multiply, resulting in significantly increased traffic and switch utilization.
+
+   The loopback can be inserted in two 100BASE-T1 ports or two 1000BASE-T1 ports.
+
+   The PHY configuration of the SJA1110 firmware need to be adapted. One need to be configured as MASTER and the other as SLAVE.
+
+ - Run Cognipilot/Cerebri on M7
+
+   Running Cognipilot/Cerebri on the M7 core enables IMU sensor data acquisition, introducing additional processing load and increasing overall device utilization.
 
 ## Usage
 
