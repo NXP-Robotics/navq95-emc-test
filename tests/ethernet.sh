@@ -7,8 +7,10 @@ if [ -z "$IP_ADDR" ]; then
     exit 1
 fi
 
+DEST_IP_ADDR=$( echo $IP_ADDR | sed 's/[0-9]\+$/1/' )
+
 echo $IP_ADDR
 
-iperf -c 192.168.0.1 -u -b 500M -l 1470 -t 0 -P 4 -B $IP_ADDR
+iperf -c $DEST_IP_ADDR -u -b 500M -l 1470 -t 0 -P 4 -B $IP_ADDR
 
 exit 1
