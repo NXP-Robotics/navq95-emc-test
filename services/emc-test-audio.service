@@ -1,0 +1,12 @@
+[Unit]
+Description=Audio EMC test
+
+[Service]
+Type=simple
+ExecStartPre=amixer -c0 set Headphone 100%
+ExecStart=speaker-test
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

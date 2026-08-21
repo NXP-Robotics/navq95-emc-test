@@ -1,0 +1,15 @@
+[Unit]
+Description=Camera 1 EMC test
+
+[Service]
+Type=simple
+Environment="LIBCAMERA_IPA_MODULE_PATH=/usr/lib/libcamera/ipa/"
+Environment="LIBCAMERA_PIPELINES_MATCH_LIST=nxp/neo,imx8-isi,uvc"
+ExecStart=gst-launch-1.0 \
+    -e libcamerasrc camera-name=/base/soc/bus@42000000/i3c@42520000/hub@70,236153000c2/smbus@1/imx219@10 ! video/x-raw,colorimetry=bt709,format=NV12,width=1920,height=1080,framerate=1/1 ! fakesink \
+    -e libcamerasrc camera-name=/base/soc/bus@42000000/i3c@42520000/hub@70,236153000c2/smbus@4/imx219@10 ! video/x-raw,colorimetry=bt709,format=NV12,width=1920,height=1080,framerate=1/1 ! fakesink
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 cleanup() {
-	echo "Ctrl-C detected, running command..."
+	echo "SIGINT detected, shutdown CAN bus"
 	ip link set can0 down
 	exit 0
 }
