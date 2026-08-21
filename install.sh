@@ -5,13 +5,16 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 SERVICES_DIR=$SCRIPT_DIR/services
 SERVICES=$(ls "$SERVICES_DIR")
 
-cp -r "$SCRIPT_DIR" /opt/navq95-emc
+# Install required packages
+apt-get update -y
+apt-get install -yq alsa-utils can-utils
 
-systemctl stop $SERVICES || true
+# Copy contents to /opt/navq95-emc
+mkdir -p /opt/navq95-emc
+rsync -a --delete ./* /opt/navq95-emc/
 
+# Create services and enable them
 cp $SERVICES_DIR/* /usr/lib/systemd/system
-
-systemctl enable $SERVICES
-systemctl start $SERVICES
+systemctl enable bluetooth $SERVICES
 
 sync
