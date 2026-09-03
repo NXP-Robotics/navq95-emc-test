@@ -145,3 +145,12 @@ All services can be disabled and removed from the boot sequence using the uninst
 # Uninstall (disable) all services
 sudo ./uninstall.sh
 ```
+
+## Others
+
+[Parts and connections](connections.md)
+
+[Generated clock frequencies](navq95-generated-frequencies.md)
+
+![](images/emc_test_setup_top.png)
+![](images/emc_test_setup_bottom.png)
