@@ -8,7 +8,7 @@ This repository contains the EMC test software for the NavQ95 platform. The soft
 
 Obtain the SD card image for the NavQ95 from [imx-manifest-navq95](https://github.com/NXP-Robotics/imx-manifest-navq95) by either building the Yocto image yourself or by downloading one of the [releases](https://github.com/NXP-Robotics/imx-manifest-navq95/releases).
 
-Write the image to an SD card, and boot up the NavQ95.
+Write the image to an SD card, and boot up the NavQ95. Instruction on how to write the image onto an SD card can be found [here](https://github.com/NXP-Robotics/imx-manifest-navq95#flash-image-to-sd-card).
 
 The console can be accessed in two ways:
 
@@ -73,6 +73,7 @@ In addition to running the test services, several optional actions can be perfor
 - **Run Cognipilot/Cerebri on the M7 core**
 
   Running Cognipilot/Cerebri on the M7 core enables IMU sensor data acquisition, introducing additional processing load and increasing overall device utilization.
+  A Cererbri image can be found [here](https://github.com/NXP-Robotics/imx-manifest-navq95/releases) and use [this deployment instruction](https://github.com/NXP-Robotics/imx-manifest-navq95#flash-nor-flash-image) to install it on the NavQ95.
 
 ## Usage
 
