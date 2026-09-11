@@ -138,6 +138,20 @@ sudo systemctl start emc-test-can.service
 
 The monitor service is `emc-test-monitor.service`.
 
+### RF based utilisations
+
+Dedicated RF test-mode utilisations for radiated/EMC measurements. These put a
+radio into continuous transmission on a chosen channel, mode and power so the
+emission can be observed on a spectrum analyser. Normal connectivity is disabled
+while a test is active.
+
+Both use the NXP IW61x combo radio module.
+
+- [Wi-Fi continuous TX](control/wifi_rf_test_continuous_tx.md) - via `wlan_sdio`
+  (`mlan0`); select channel, mode, bandwidth and power.
+- [Bluetooth continuous TX](control/bluetooth_rf_test_continuous_tx.md) - via
+  `btnxpuart`; LE DTM / carrier TX with selectable channel and power.
+
 ## Uninstallation
 
 All services can be disabled and removed from the boot sequence using the uninstall helper script:
