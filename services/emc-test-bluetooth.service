@@ -1,9 +1,14 @@
 [Unit]
-Description=Bluetooth EMC test
+Description=Bluetooth EMC test (RF test mode continuous TX sweep)
 
 [Service]
 Type=simple
 ExecStart=/opt/navq95-emc/tests/bluetooth.sh
+# Leave RF test mode and reset the controller on stop.
+ExecStopPost=-/opt/navq95-emc/control/bluetooth.sh --stop
+# Signal the whole cgroup so the dwell sleep dies immediately.
+KillMode=mixed
+TimeoutStopSec=10
 Restart=on-failure
 RestartSec=10
 
