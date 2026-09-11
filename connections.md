@@ -4,10 +4,10 @@ NXP X-NAVQ95-MAIN (DRQ30074657) (700-97010 REV X1) (SCH-97010 REV A)
 
 | ID             | PartNumber              | Quantity | Description                          | Connection 1                                  | Connection 2                                    | Connection 3         |
 |----------------|-------------------------|----------|--------------------------------------|-----------------------------------------------|-------------------------------------------------|----------------------|
-| X-NAVQ95-MAIN  | NXP 9355 073 92598      | 1        | NavQ95B Main board                   |                                               |                                                 |                      |
-| X-NAVQ95-IO    | NXP 9355 073 98598      | 1        | NavQ95B IO shield                    |                                               |                                                 |                      |
-| X-NAVQ95-T1SW  | NXP 9355 073 94598      | 1        | NavQ95B T1 Switch shield             |                                               |                                                 |                      |
-| X-NAVQ95-CAMRP | NXP 9355 073 96598      | 2        | NavQ95B Camera shield                |                                               |                                                 |                      |
+| X-NAVQ95-MAIN  | NAVQ95-MAIN             | 1        | NavQ95B Main board                   |                                               |                                                 |                      |
+| X-NAVQ95-IO    | NAVQ95-IO               | 1        | NavQ95B IO shield                    |                                               |                                                 |                      |
+| X-NAVQ95-T1SW  | NAVQ95-T1SW             | 1        | NavQ95B T1 Switch shield             |                                               |                                                 |                      |
+| X-NAVQ95-CAMRP | NAVQ95-CAMRP            | 2        | NavQ95B Camera shield                |                                               |                                                 |                      |
 | EXT_1          | PAK HENG E301195        | 1        | USB host cable                       | X-NAVQ95-IO J1(CONSOLE)                       | Host laptop *                                   |                      |
 | EXT_2          | custom                  | 1        | CAN BUS cable (cable has three ends) | X-NAVQ95-IO J5(CAN1)                          | X-NAVQ95-IO J4(CAN2)                            | X-NAVQ95-IO J3(CAN3) |
 | EXT_3          | Generic 3.5mm jack      | 1        | Earphones                            | X-NAVQ95-IO Earphone jack                     |                                                 |                      |
