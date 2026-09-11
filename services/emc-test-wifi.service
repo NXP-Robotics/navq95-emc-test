@@ -1,11 +1,16 @@
 [Unit]
-Description=WIFI EMC test
+Description=WIFI EMC test (RF test mode continuous TX sweep)
 Before=emc-test-sdcard.service
-After=NetworkManager.service
 
 [Service]
 Type=simple
 ExecStart=/opt/navq95-emc/tests/wifi.sh
+# Leave RF test mode and bring mlan0 back up on stop.
+ExecStopPost=-/opt/navq95-emc/control/wifi.sh --stop
+# Signal the whole cgroup so the dwell sleep dies immediately, and do not wait
+# the default 90s before giving up.
+KillMode=mixed
+TimeoutStopSec=10
 Restart=on-failure
 RestartSec=10
 

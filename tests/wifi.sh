@@ -1,17 +1,60 @@
 #!/bin/bash
-set -euo pipefail
+#
+# WIFI EMC test: continuously sweep RF test mode continuous TX over a list of
+# channels using control/wifi.sh. No network traffic (iperf) is used.
+#
+set -uo pipefail
 
-IP_ADDR=$(ip -4 -o addr show mlan0 | awk '{print $4}' | cut -d/ -f1)
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+CONTROL="$SCRIPT_DIR/../control/wifi.sh"
 
-if [ -z "$IP_ADDR" ]; then
-    exit 1
-fi
+# Seconds of continuous TX per sweep step.
+DWELL="${DWELL:-30}"
+# TX power in dBm (0-24).
+POWER="${POWER:-15}"
 
-DEST_IP_ADDR=$( echo $IP_ADDR | sed 's/[0-9]\+$/1/' )
+# Sweep steps: "CHANNEL MODE BANDWIDTH"
+# MODE: 11 = 2.4G [1x1], 3 = 5G [1x1]   BANDWIDTH: 0 = 20MHz
+STEPS=(
+    "1 11 0"
+    "6 11 0"
+    "11 11 0"
+    "36 3 0"
+    "40 3 0"
+    "44 3 0"
+    "48 3 0"
+    "149 3 0"
+    "153 3 0"
+    "157 3 0"
+    "161 3 0"
+)
 
-echo $IP_ADDR
+[ -x "$CONTROL" ] || { echo "missing $CONTROL" >&2; exit 1; }
 
-iw dev mlan0 set power_save off
-iperf -c $DEST_IP_ADDR -u -b 500M -l 1470 -t 0 -P 4 -B $IP_ADDR
+CHILD=""
 
-exit 1
+# Always leave the radio in a clean state.
+cleanup() {
+    if [ -n "$CHILD" ]; then
+        pkill -TERM -P "$CHILD" 2>/dev/null || true   # the dwell 'sleep'
+        kill -TERM "$CHILD" 2>/dev/null || true
+        wait "$CHILD" 2>/dev/null || true
+    fi
+    "$CONTROL" --stop || true
+}
+trap cleanup EXIT
+# Exit immediately on stop; the EXIT trap does the cleanup.
+trap 'exit 0' INT TERM
+
+while true; do
+    for step in "${STEPS[@]}"; do
+        read -r channel mode bandwidth <<< "$step"
+        echo "sweep: channel=$channel mode=$mode bw=$bandwidth power=$POWER dwell=${DWELL}s"
+        # Run in background and wait, so SIGTERM is handled without waiting
+        # for the dwell to expire.
+        "$CONTROL" -c "$channel" -m "$mode" -b "$bandwidth" -p "$POWER" -d "$DWELL" &
+        CHILD=$!
+        wait "$CHILD" || echo "step failed (channel=$channel), continuing"
+        CHILD=""
+    done
+done

@@ -33,12 +33,12 @@ The following external devices are required to run the test software:
 - NVMe SSD in the M.2 Key M slot
 - External network infrastructure:
   - An Ethernet switch connected to the Ethernet port on J8
-  - A Wi-Fi access point with an SSID that the NavQ95 Wi-Fi interface is configured to join
 - A CAN bus loopback wire connecting all NavQ95 CAN interfaces (J4, J8, and J9 on the IO shield) to each other, without termination resistors
 
 > **NOTE:** USB drives, NVMe SSDs, and eMMC storage devices must be formatted with a filesystem supported by the NavQ95. The recommended filesystem is ext4.
 
-> **NOTE:** The Wi-Fi interface must be configured to connect to a wireless network before starting the tests. Run `sudo nmtui` to attach to an SSID.
+> **NOTE:** The Wi-Fi test uses RF test mode continuous TX, so no access point is
+> needed. Normal Wi-Fi connectivity on `mlan0` is unavailable while the test runs.
 
 ## Features
 
@@ -134,7 +134,7 @@ sudo systemctl start emc-test-can.service
 | `emc-test-sdcard.service` | Exercises the SD card |
 | `emc-test-usb1.service` | Exercises the first USB storage device |
 | `emc-test-usb2.service` | Exercises the second USB storage device |
-| `emc-test-wifi.service` | Exercises the Wi-Fi interface |
+| `emc-test-wifi.service` | Sweeps Wi-Fi RF test mode continuous TX over 2.4/5 GHz channels |
 
 The monitor service is `emc-test-monitor.service`.
 
