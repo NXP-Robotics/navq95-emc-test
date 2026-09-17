@@ -167,5 +167,5 @@ sudo ./uninstall.sh
 
 [Generated clock frequencies](navq95-generated-frequencies.md)
 
-![](images/emc_test_setup_top.png)
-![](images/emc_test_setup_bottom.png)
+![](images/emc_test_setup_top.jpg)
+![](images/emc_test_setup_bottom.jpg)
