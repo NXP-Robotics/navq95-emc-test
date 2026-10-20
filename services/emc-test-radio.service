@@ -1,12 +1,13 @@
 [Unit]
-Description=WIFI EMC test (RF test mode continuous TX sweep)
+Description=Radio EMC test (WIFI + Bluetooth alternating continuous TX sweep)
 Before=emc-test-sdcard.service
 
 [Service]
 Type=simple
-ExecStart=/opt/navq95-emc/tests/wifi.sh
-# Leave RF test mode and bring mlan0 back up on stop.
+ExecStart=/opt/navq95-emc/tests/radio.sh
+# Leave RF test mode, bring mlan0 back up and reset the BT controller on stop.
 ExecStopPost=-/opt/navq95-emc/control/wifi.sh --stop
+ExecStopPost=-/opt/navq95-emc/control/bluetooth.sh --stop
 # Signal the whole cgroup so the dwell sleep dies immediately, and do not wait
 # the default 90s before giving up.
 KillMode=mixed

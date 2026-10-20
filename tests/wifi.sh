@@ -9,9 +9,9 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 CONTROL="$SCRIPT_DIR/../control/wifi.sh"
 
 # Seconds of continuous TX per sweep step.
-DWELL="${DWELL:-30}"
+DWELL="${DWELL:-1}"
 # TX power in dBm (0-24).
-POWER="${POWER:-15}"
+POWER="${POWER:-10}"
 
 # Sweep steps: "CHANNEL MODE BANDWIDTH"
 # MODE: 11 = 2.4G [1x1], 3 = 5G [1x1]   BANDWIDTH: 0 = 20MHz

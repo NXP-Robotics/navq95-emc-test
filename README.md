@@ -37,8 +37,12 @@ The following external devices are required to run the test software:
 
 > **NOTE:** USB drives, NVMe SSDs, and eMMC storage devices must be formatted with a filesystem supported by the NavQ95. The recommended filesystem is ext4.
 
-> **NOTE:** The Wi-Fi test uses RF test mode continuous TX, so no access point is
+> **NOTE:** The radio test uses RF test mode continuous TX, so no access point is
 > needed. Normal Wi-Fi connectivity on `mlan0` is unavailable while the test runs.
+
+> **NOTE:** Wi-Fi and Bluetooth share the 2.4 GHz band, so they are swept by a
+> single service (`emc-test-radio.service`) that alternates between a Wi-Fi
+> channel and a Bluetooth channel. Only one radio transmits at a time.
 
 ## Features
 
@@ -123,7 +127,6 @@ sudo systemctl start emc-test-can.service
 | Service | Description |
 |---------|-------------|
 | `emc-test-audio.service` | Exercises the audio interface |
-| `emc-test-bluetooth.service` | Exercises the Bluetooth interface |
 | `emc-test-cameras.service` | Exercises both camera interfaces |
 | `emc-test-can.service` | Exercises the CAN bus interfaces |
 | `emc-test-console.service` | Exercises the serial console |
@@ -131,10 +134,10 @@ sudo systemctl start emc-test-can.service
 | `emc-test-ethernet.service` | Exercises the Ethernet interface |
 | `emc-test-nvme1.service` | Exercises the first NVMe SSD |
 | `emc-test-nvme2.service` | Exercises the second NVMe SSD |
+| `emc-test-radio.service` | Alternates Wi-Fi (2.4/5 GHz) and Bluetooth LE continuous TX sweeps, one radio at a time |
 | `emc-test-sdcard.service` | Exercises the SD card |
 | `emc-test-usb1.service` | Exercises the first USB storage device |
 | `emc-test-usb2.service` | Exercises the second USB storage device |
-| `emc-test-wifi.service` | Sweeps Wi-Fi RF test mode continuous TX over 2.4/5 GHz channels |
 
 The monitor service is `emc-test-monitor.service`.
 

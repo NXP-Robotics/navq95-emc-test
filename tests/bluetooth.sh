@@ -9,9 +9,9 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 CONTROL="$SCRIPT_DIR/../control/bluetooth.sh"
 
 # Seconds of continuous TX per sweep step.
-DWELL="${DWELL:-30}"
+DWELL="${DWELL:-1}"
 # TX power in dBm (-20..20); empty = use module calibration default.
-POWER="${POWER:-}"
+POWER="${POWER:-10}"
 
 # LE DTM channels to sweep (0..39, freq = 2402 + 2*CHANNEL MHz).
 STEPS=(39 0 9 19 29)
